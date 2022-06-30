@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'plugin/bootstrap/css/bootstrap.min.css' %}">
+</head>
+<body>
+{% block content %}
+    <div class="container">
+        <button class="btn btn-success btn-xs" style="margin-bottom: 10px">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            <a href="/depart/add/" style="color: white;text-decoration: none">新建部门</a>
+        </button>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                部门列表
+            </div>
+            <div class="panel-body">
+                <div class="bs-example" data-example-id="simple-table">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>名称</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for query in queryest %}
+                            <tr>
+                                <th scope="row">{{ query.id }}</th>
+                                <td>{{ query.industry_title }}</td>
+                                <td>
+                                    <button class="btn btn-primary btn-xs">
+                                        <a href="/depart/{{ query.id }}/edit"
+                                           style="color: white;text-decoration: none">编辑</a>
+                                    </button>
+                                    <button class="btn btn-danger btn-xs">
+                                        <a href="/depart/delete/?nid={{ query.id }}"
+                                           style="color: white;text-decoration: none">删除</a>
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <ul class="pagination">
+            {{ page_string }}
+        </ul>
+    </div>
+
+{% endblock %}
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+<script src="{% static 'plugin/bootstrap/js/bootstrap.min.js' %}"></script>
+</body>
+</html>

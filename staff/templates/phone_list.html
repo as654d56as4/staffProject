@@ -1,0 +1,75 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <dvi class="container">
+        <div class="clearfix"><a href="/phone/add/" class="btn btn-success" style="margin-bottom: 10px">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            新建靓号</a>
+        </div>
+        <div style="float: right;width: 300px">
+            <form method="get">
+                <div class="input-group">
+
+                    <input type="text" name='q' class="form-control" placeholder="搜索手机号" value={{ q }}>
+                    <span class="input-group-btn">
+        <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"
+                                                            aria-hidden="true"></span></button>
+      </span>
+
+                </div><!-- /input-group -->
+            </form>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                用户列表
+            </div>
+
+            <div class="panel-body">
+                <div class="bs-example" data-example-id="bordered-table">
+                    <table class="table ">
+                        <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>号码</th>
+                            <th>价格</th>
+                            <th>级别</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for obj in queryset %}
+                            <tr>
+                                <th>{{ obj.id }}</th>
+                                <td>{{ obj.mobile }}</td>
+                                <td>{{ obj.price }}</td>
+                                <td>{{ obj.get_rank_display }}</td>
+                                <td>{{ obj.get_status_display }}</td>
+                                <td>
+                                    <button class="btn btn-primary btn-xs">
+                                        <a href="/phone/{{ obj.id }}/edit"
+                                           style="color: white;text-decoration: none">编辑</a>
+                                    </button>
+                                    <button class="btn btn-danger btn-xs">
+                                        <a href="/phone/{{ obj.id }}/delete"
+                                           style="color: white;text-decoration: none">删除</a>
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <form method="get">
+            <ul class="pagination">
+                {{ page_string }}
+            </ul>
+
+            </div>
+        </form>
+    </dvi>
+    </dvi>
+{% endblock %}
